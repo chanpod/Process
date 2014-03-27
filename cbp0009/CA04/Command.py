@@ -3,9 +3,7 @@ Created on Mar 27, 2014
 
 @author: chanpod
 '''
-import re
-import math
-import os.path
+
 
 class Command(object):
     
@@ -60,14 +58,21 @@ class Command(object):
                         
                         if(modeIn == self.TRANSMITSTATUS):
                             self.modeCommand = self.TRANSMITSTATUS
+                            return modeIn
                         elif(modeIn == self.SHUTDOWN):
                             self.modeCommand = self.SHUTDOWN
+                            return modeIn
                         elif(modeIn == self.RESET):
                             self.modeCommand = self.RESET
+                            return modeIn
                         elif(modeIn == self.TRANSMITVECTOR):
                             self.modeCommand = self.TRANSMITVECTOR
+                            return modeIn
                         elif(modeIn == self.TRANSMITLASTCOMMAND):
                             self.modeCommand = self.TRANSMITLASTCOMMAND
+                            return modeIn
+                        else:
+                            raise ValueError
                             
                     else:
                         raise ValueError
@@ -75,7 +80,7 @@ class Command(object):
                     raise ValueError
                 
             except ValueError:
-                print("Command.setToModeComand: mode is invalid. Must be 2, 4, 8, 12, or 14.")
+                print("Command.setToModeCommand: mode is invalid. Must be 2, 4, 8, 12, or 14.")
         else:
             self.modeCommand = self.TRANSMITSTATUS
     
@@ -98,13 +103,80 @@ class Command(object):
         ADDRESSMIN = 0
         ADDRESSMAX = 31
         try:
-            if(address == None):
+            if(self.commandType == self.MODECOMMAND):
                 raise ValueError
+        except ValueError:
+            print("Command.setSubAddress:  Instance is in mode commmand.")
+            return
+            
+        try:
+            if(address == None):
+                raise ValueError            
             else:
                 if(isinstance(address, int)):
                     if(address >= ADDRESSMIN and address <= ADDRESSMAX):
                         self.subaddress = address
+                        return address
                 else:
                     raise ValueError
         except ValueError:
-            print("Command.setSubAddress:  ")
+            print("Command.setSubAddress:  address is invalid. Must be an int from 0 to 31.")
+    
+    def getSubAddress(self):
+        try:
+            if(self.commandType == self.MODECOMMAND):
+                raise ValueError
+            else:
+                return self.subaddress
+        except ValueError:
+            print("Command.getSubAddress:  Instance is in mode commmand.")
+    
+    def setWordCount(self, countIn = None):
+        try:
+            if(self.commandType == self.MODECOMMAND):
+                raise ValueError           
+        except ValueError:
+            print("Command.setWordCount:  Instance is in mode commmand.")
+            return
+        
+        try:
+            if(isinstance(countIn, int)):
+                if(countIn >= 0 and countIn <= 32):
+                    self.count = countIn
+                    return countIn
+                else:
+                    raise ValueError
+            else:
+                raise ValueError
+        except ValueError:
+            print("Command.setWordCount:  Count isn't a valid int. Must be from 0 to 32.")
+    
+    def getWordCount(self):
+        try:
+            if(self.commandType == self.MODECOMMAND):
+                raise ValueError           
+            else:
+                return self.count
+        except ValueError:
+            print("Command.getWordCount:  Instance is in mode commmand.")
+            return
+        
+    def setTransmitCommand(self):
+        if(self.tran_receiveFlag == self.TRANSMIT):            
+            return True
+        else:
+            self.tran_receiveFlag = self.TRANSMIT
+            return False
+    def setReceiveCommand(self):
+        if(self.tran_receiveFlag == self.RECEIVE):            
+            return True
+        else:
+            self.tran_receiveFlag = self.RECEIVE
+            return False
+    
+    def isTransmitCommand(self):
+        if(self.tran_receiveFlag == self.TRANSMIT):            
+            return True
+        else:      
+            return False
+        

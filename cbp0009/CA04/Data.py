@@ -3,9 +3,7 @@ Created on Mar 27, 2014
 
 @author: chanpod
 '''
-import re
-import math
-import os.path
+
 
 class Data(object):
     MAXINT = 65535
