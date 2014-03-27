@@ -5,7 +5,7 @@ Modified 3-2-2014
 @author: Chauncey Philpot: cbp0009
 '''
 import unittest
-from CA02.starcatalog import StarCatalog
+from starcatalog import StarCatalog
 class StarCatalogTest(unittest.TestCase):
     
     fileName = "catalog.txt"

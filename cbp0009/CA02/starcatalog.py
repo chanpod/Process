@@ -4,7 +4,7 @@
 import re
 import math
 import os.path
-
+ 
 class StarCatalog(object):
    
     def __init__(self, fileName=None):
