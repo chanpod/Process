@@ -1,6 +1,7 @@
 '''
 Created on Mar 27, 2014
-
+Total LOC: 287
+LOC: 22
 @author: chanpod
 '''
 
