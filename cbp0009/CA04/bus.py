@@ -4,9 +4,9 @@ LOC: 18
 @author: chanpod
 '''
 
-import Command
-import Data
-import Status
+from command import Command
+from data import Data
+from status import Status
 
 class Bus(object):
     FIRSTINDEX = 0
@@ -19,12 +19,12 @@ class Bus(object):
             else:
                 if(isinstance(wordIn, (Command, Data, Status))):
                     self.bus.append(wordIn)
+                    return len(self.bus)
                 else:
                     raise ValueError
         except ValueError:
             print("Bus.writeBus:  word invalid or ommited.")
     
     def readBus(self):
-        word = self.bus.index(self.FIRSTINDEX);
-        self.bus.remove(self.FIRSTINDEX)
+        word = self.bus.pop()      
         return word

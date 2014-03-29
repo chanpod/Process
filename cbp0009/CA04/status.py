@@ -23,7 +23,8 @@ class Status(object):
                 raise ValueError
             else:
                 if(isinstance(addressIn, int)):
-                    self.address = addressIn
+                    if(addressIn >= 0 and addressIn <=31):
+                        self.address = addressIn
                 else:
                     raise ValueError
         except ValueError:

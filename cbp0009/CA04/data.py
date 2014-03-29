@@ -29,6 +29,7 @@ class Data(object):
                 if(isinstance(payloadIn, int)):
                     if(payloadIn >= self.MININT or payloadIn <= self.MAXINT):
                         self.payload = payloadIn
+                        return payloadIn
                     else:
                         raise ValueError
                 else:
