@@ -21,13 +21,14 @@ class RemoteTerminal(object):
             print("RemoteTerminal.init:  Address must be given.")
     
     def readBus(self, busIn = None):
+            bus = Bus()
             try:
                 if(busIn == None):
                     raise ValueError
                 else:
                     if(isinstance(busIn, Bus)):
-                        data = busIn.readBus()
-                return data
+                        bus.writeBus(busIn.readBus())
+                return bus
             except ValueError:
                 print("RemoteTerminal.readBus:"  
                     "  Bus object not give or not an instance of Bus.")
