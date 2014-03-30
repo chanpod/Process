@@ -9,12 +9,12 @@ from status import Status
 from data import Data
 from command import Command
 
-class Test(unittest.TestCase):
+class DataTest(unittest.TestCase):
 
 
     def test_init(self):
         data = Data(1)
-        self.assertEqual(data.getContent(), 1, 
+        self.assertTrue(isinstance(data, Data), 
                          "Payload not being assigned properly.")
         data = Data()
         self.assertEqual(data.getContent(), None,

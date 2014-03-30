@@ -9,7 +9,7 @@ from status import Status
 from data import Data
 from command import Command
 
-class Test(unittest.TestCase):
+class BusTest(unittest.TestCase):
 
     def test_bus(self):
         bus = Bus()

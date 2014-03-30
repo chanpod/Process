@@ -45,7 +45,11 @@ class Command(object):
         return self.address
     
     def setToCommandWord(self):
-        self.commandType = self.COMMANDWORD
+        if(self.commandType == self.COMMANDWORD)  :          
+            return True
+        else:
+            self.commandType = self.COMMANDWORD
+            return False
     
     def setToModeCommand(self, modeIn = None):
         MODEMIN = 0

@@ -46,7 +46,7 @@ class Status(object):
     def isServiceRequested(self):
         isService = False
         
-        if(self.requestFalg == True):
+        if(self.requestFlag == True):
             isService = True
         else:
             isService = False
