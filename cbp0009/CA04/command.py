@@ -35,11 +35,16 @@ class Command(object):
                 raise ValueError
             else:
                 if(isinstance(addressIn, int)):
-                    self.address = addressIn
+                    if(addressIn >= 0 and addressIn <= 31):
+                        self.address = addressIn
+                    else:
+                        raise ValueError
                 else:
                     raise ValueError
         except:
-            print("Command.init: Address is invalid or missing.")
+            print("Command.init: Address is invalid or missing."
+                  "Must be from 0 to 31.")
+            raise ValueError
     
     def getTerminal(self):
         return self.address
@@ -85,6 +90,7 @@ class Command(object):
                 
             except ValueError:
                 print("Command.setToModeCommand: mode is invalid. Must be 2, 4, 8, 12, or 14.")
+                raise ValueError
         else:
             self.modeCommand = self.TRANSMITSTATUS
     
@@ -96,6 +102,7 @@ class Command(object):
                 raise ValueError
         except ValueError:
             print("Command.getModeCode:  Current state is command word.")
+            raise ValueError
     
     def isModeCommand(self):
         if(self.commandType == self.MODECOMMAND):
@@ -111,6 +118,7 @@ class Command(object):
                 raise ValueError
         except ValueError:
             print("Command.setSubAddress:  Instance is in mode commmand.")
+            raise ValueError
             return
             
         try:
@@ -125,6 +133,7 @@ class Command(object):
                     raise ValueError
         except ValueError:
             print("Command.setSubAddress:  address is invalid. Must be an int from 0 to 31.")
+            raise ValueError
     
     def getSubAddress(self):
         try:
@@ -134,6 +143,7 @@ class Command(object):
                 return self.subaddress
         except ValueError:
             print("Command.getSubAddress:  Instance is in mode commmand.")
+            raise ValueError
     
     def setWordCount(self, countIn = None):
         try:
@@ -141,6 +151,7 @@ class Command(object):
                 raise ValueError           
         except ValueError:
             print("Command.setWordCount:  Instance is in mode commmand.")
+            raise ValueError
             return
         
         try:
@@ -154,6 +165,7 @@ class Command(object):
                 raise ValueError
         except ValueError:
             print("Command.setWordCount:  Count isn't a valid int. Must be from 0 to 32.")
+            raise ValueError
     
     def getWordCount(self):
         try:
@@ -163,6 +175,7 @@ class Command(object):
                 return self.count
         except ValueError:
             print("Command.getWordCount:  Instance is in mode commmand.")
+            raise ValueError
             return
         
     def setTransmitCommand(self):

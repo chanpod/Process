@@ -16,9 +16,17 @@ class RemoteTerminal(object):
             if(addressIn == None):
                 raise ValueError
             else:
-                self.address = addressIn
+                if(isinstance(addressIn, int)):
+                    if(addressIn >= 0 and addressIn <= 31):
+                        self.address = addressIn
+                    else:
+                        raise ValueError
+                else:
+                    raise ValueError
         except ValueError:
-            print("RemoteTerminal.init:  Address must be given.")
+            print("RemoteTerminal.init:"
+                  "  Valid Address from 0 to 31 must be given.")
+            raise ValueError
     
     def readBus(self, busIn = None):
             bus = Bus()
@@ -28,10 +36,13 @@ class RemoteTerminal(object):
                 else:
                     if(isinstance(busIn, Bus)):
                         bus.writeBus(busIn.readBus())
+                    else:
+                        raise ValueError
                 return bus
             except ValueError:
                 print("RemoteTerminal.readBus:"  
                     "  Bus object not give or not an instance of Bus.")
+                raise ValueError
     def getAddress(self):
         return self.address
         

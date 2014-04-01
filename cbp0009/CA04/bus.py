@@ -24,7 +24,16 @@ class Bus(object):
                     raise ValueError
         except ValueError:
             print("Bus.writeBus:  word invalid or ommited.")
+            raise ValueError
     
     def readBus(self):
-        word = self.bus.pop()      
+      
+        try:
+            if(len(self.bus) != 0):                
+                word = self.bus.pop()
+            else:
+                raise ValueError
+        except ValueError:
+            print("Bus is empty. Nothing to read.")
+            raise ValueError   
         return word

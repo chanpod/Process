@@ -14,7 +14,7 @@ class Data(object):
         if(payloadIn != None):
             try:
                 if(isinstance(payloadIn, int)):
-                    if(payloadIn >= self.MININT or payloadIn <= self.MAXINT):
+                    if(payloadIn >= self.MININT and payloadIn <= self.MAXINT):
                         self.payload = payloadIn
                     else:
                         raise ValueError
@@ -22,12 +22,13 @@ class Data(object):
                     raise ValueError
             except ValueError:
                 print("Data.init: Payload isn't a valid integer: 0 to 65535")
+                raise ValueError
     
     def setContent(self, payloadIn = None):
         try:
             if(payloadIn != None):                            
                 if(isinstance(payloadIn, int)):
-                    if(payloadIn >= self.MININT or payloadIn <= self.MAXINT):
+                    if(payloadIn >= self.MININT and payloadIn <= self.MAXINT):
                         self.payload = payloadIn
                         return payloadIn
                     else:
@@ -37,6 +38,7 @@ class Data(object):
         
         except ValueError:
                 print("Data.setContent: Payload isn't a valid integer: 0 to 65535 or is missing")
+                raise ValueError
     
     def getContent(self):
         return self.payload

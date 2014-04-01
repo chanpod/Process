@@ -15,9 +15,12 @@ class Test(unittest.TestCase):
     
 
     def test_init(self):
+        #Happy Case
         rt = RemoteTerminal(4)
         self.assertTrue(isinstance(rt, RemoteTerminal),
                         "Object is not of instance RemoteTerminal")
+        
+        self.assertRaises(ValueError, RemoteTerminal, 'a')
     
     def test_getAddress(self):
         rt = RemoteTerminal(4)
@@ -25,6 +28,7 @@ class Test(unittest.TestCase):
                          "Not Assigning address correctly.")
     
     def test_readBus(self):
+        #Happy Case
         rt = RemoteTerminal(4)
         data = Data(1)
         bus = Bus()
@@ -32,6 +36,9 @@ class Test(unittest.TestCase):
         bus2 = rt.readBus(bus)
         self.assertTrue(isinstance(bus2, Bus), 
                         "Not assigning")
+        
+        #Sad Case
+        self.assertRaises(ValueError, rt.readBus, 'a')
         
         
 

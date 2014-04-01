@@ -14,9 +14,13 @@ class CommandTest(unittest.TestCase):
     rt = RemoteTerminal(4)
 
     def test_init(self):
+        #Happy Case
         com = Command(self.rt.getAddress())
         self.assertTrue(isinstance(com, Command), 
                         "Command is being initialized correctly.")
+        
+        #Sad Case
+        self.assertRaises(ValueError, Command, -1)
     
     def test_getTerminalAddress(self):
         com = Command(self.rt.getAddress())
@@ -24,6 +28,7 @@ class CommandTest(unittest.TestCase):
                          "address is incorrect. Should be 4.")
     
     def test_setToCommandWord(self):
+        #Happy Case
         com = Command(self.rt.getAddress())
         self.assertEqual(com.setToCommandWord(), False, 
                          "Should be false. Initializing incorrectly"
@@ -31,12 +36,28 @@ class CommandTest(unittest.TestCase):
         com.setToModeCommand(4)
         self.assertEqual(com.setToCommandWord(), True,
                          "Should be true. Incorrect logic or assignment not being made.")
+        
+        #Sad Case
+        self.assertRaises(ValueError, com.setToModeCommand, 3)
     
     def test_setToModeCommand(self):
+        #Happy Case
         com = Command(self.rt.getAddress())
         self.assertEqual(com.setToModeCommand(2), 2,
                          "Not returning passed integer correctly.")
-    
+        
+        #Sad Case
+        self.assertRaises(ValueError, com.setSubAddress,  'a')
+        self.assertRaises(ValueError, com.setSubAddress, 4)
+        self.assertRaises(ValueError, com.getSubAddress)
+        self.assertRaises(ValueError, com.setWordCount, -2)
+        self.assertRaises(ValueError, com.setWordCount, 2)
+        self.assertRaises(ValueError, com.getWordCount)
+        
+        com.setToCommandWord()
+        self.assertRaises(ValueError, com.setWordCount, -2)
+        self.assertRaises(ValueError, com.setSubAddress,  'a')
+        
     def test_getModeCode(self):
         com = Command(self.rt.getAddress())
         com.setToModeCommand(4)

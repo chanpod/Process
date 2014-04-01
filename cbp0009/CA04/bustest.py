@@ -16,13 +16,20 @@ class BusTest(unittest.TestCase):
         self.assertTrue(isinstance(bus, Bus), "bus is not an instance of Bus")
         
     def test_writeBus(self):
+        #Happy Case
         bus = Bus()
         status = Status(5)
         self.assertEquals(bus.writeBus(status), 1, 
-                          "Not returning the correct number of items in bus.") 
+                          "Not returning the correct number of items in bus.")
+        
+        
+        #Sad Case
+        self.assertRaises(ValueError, bus.writeBus, 'a')       
+        
         
     
     def test_readBus(self):
+        #Happy Case
         bus = Bus()
         status = Status(5)
         bus.writeBus(status)
@@ -30,5 +37,8 @@ class BusTest(unittest.TestCase):
         
         self.assertTrue(isinstance(word, (Status, Command, Data)), 
                         "Word is not an instance of Bus, Command, or Data.")
+        
+        #Sad Case
+        self.assertRaises(ValueError, bus.readBus)
 
 
