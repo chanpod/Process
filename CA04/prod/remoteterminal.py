@@ -5,7 +5,7 @@ LOC: 22
 @author: chanpod
 '''
 
-from bus import Bus
+from CA04.prod.bus import Bus
 
 class RemoteTerminal(object):
     

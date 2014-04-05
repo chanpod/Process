@@ -4,11 +4,11 @@ Created on Mar 30, 2014
 @author: chanpod
 '''
 import unittest
-from bus import Bus
-from status import Status
-from data import Data
-from command import Command
-from remoteterminal import RemoteTerminal
+from CA04.prod.bus import Bus
+from CA04.prod.status import Status
+from CA04.prod.data import Data
+from CA04.prod.command import Command
+from CA04.prod.remoteterminal import RemoteTerminal
 
 class CommandTest(unittest.TestCase):
     rt = RemoteTerminal(4)
